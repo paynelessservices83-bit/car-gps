@@ -35,6 +35,8 @@
 
 <!-- Floating buttons -->
 <div id="fabs">
+  <button class="fab" id="chatBtn" title="Chat">💬<span id="chatBadge" class="badge hidden">0</span></button>
+  <button class="fab" id="pinBtn" title="Drop pin">📌</button>
   <button class="fab" id="friendsBtn" title="Share / Friends">👥<span id="friendsDot" class="hidden"></span></button>
   <button class="fab" id="darkBtn" title="Dark mode">🌙</button>
   <button class="fab" id="simBtn" title="Simulate drive">▶︎</button>
@@ -136,7 +138,39 @@
       <img id="psCard" class="card-thumb" alt="business card">
       <div class="ps-links"><a id="psCall" class="primary hidden">📞 Call</a><a id="psWeb" class="secondary hidden" target="_blank" rel="noopener noreferrer nofollow">🌐 Website</a></div></div>
     <div id="psNone" class="status hidden">No details shared.</div>
+    <button id="psDM" class="primary wide">💬 Message</button>
+    <button id="psHideUser" class="secondary wide">🙈 Hide this user's messages</button>
     <button id="psReport" class="secondary wide">🚩 Report / hide this profile</button>
+  </div>
+</div>
+<!-- Pin sheet (edit / view) -->
+<div id="pinPanel" class="panel hidden">
+  <div class="panel-card">
+    <div class="panel-head"><h2 id="pinHead">Drop a pin</h2><button id="closePin" class="xbtn">✕</button></div>
+    <div id="pinEdit">
+      <div class="emoji-row" id="pinEmojis"></div>
+      <div class="col"><label>Title</label><input id="pinTitle" class="txt" maxlength="40" placeholder="e.g. Car wash meetup"></div>
+      <div class="col"><label>Note (optional)</label><textarea id="pinNote" class="txt" maxlength="200" rows="3"></textarea></div>
+      <div class="row"><label><input type="checkbox" id="pinShare"> <span id="pinShareLbl">Share</span></label></div>
+      <div id="pinWho" class="notice"></div>
+      <button id="pinSave" class="primary wide">Save pin</button>
+    </div>
+    <div id="pinView" class="hidden">
+      <div class="pv-title"><span id="pvEmoji"></span> <b id="pvTitle"></b></div>
+      <div id="pvNote" class="ps-bio"></div>
+      <div id="pvMeta" class="status" style="text-align:left"></div>
+      <div class="ps-links"><button id="pvDir" class="primary">🧭 Directions</button><button id="pvDel" class="secondary">🗑 Delete</button></div>
+    </div>
+  </div>
+</div>
+<!-- Chat -->
+<div id="chatPanel" class="panel hidden">
+  <div class="panel-card chat-card">
+    <div class="panel-head"><h2>Chat</h2><button id="closeChat" class="xbtn">✕</button></div>
+    <div class="row"><select id="chatThread" class="txt"></select></div>
+    <div id="chatWho" class="status"></div>
+    <div id="chatList"></div>
+    <div class="chat-input"><input id="chatText" class="txt" maxlength="300" placeholder="Message…" enterkeyhint="send"><button id="chatSend" class="primary">Send</button></div>
   </div>
 </div>
 <div id="cardView" class="hidden"><img id="cardViewImg" alt="business card"></div>
@@ -149,5 +183,6 @@
 <script src="app.js"></script>
 <script src="vision.js"></script>
 <script src="presence.js"></script>
+<script src="social.js"></script>
 </body>
 </html>

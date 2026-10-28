@@ -87,6 +87,7 @@ function subscribeFor(p) {
   for (const t of subs) if (!want.has(t)) client.unsubscribe(t);
   for (const t of want) if (!subs.has(t)) client.subscribe(t);
   subs = want; cells = p ? cellOf(p) : '';
+  hooks.sub.forEach(f => { try { f(); } catch (e) { console.warn(e); } });
 }
 function posTopic(p) { return st.mode === 'private' ? `${base}/p/${st.cid}` : `${base}/c/${cellOf(p)}/${st.cid}`; }
 function publish(force) {
@@ -108,11 +109,14 @@ function disconnect(sayBye) {
   const c = client; client = null; subs.clear(); cells = '';
   if (c) { if (sayBye) { c.publish(`${base}/bye/${st.cid}`, '1'); c.publish(`${base}/img/${st.cid}`, '', { retain: true }); c.publish(`${base}/prof/${st.cid}`, '', { retain: true }); } setTimeout(() => c.end(), 300); }
   for (const id of [...peers.keys()]) removePeer(id);
+  hooks.off.forEach(f => { try { f(); } catch (e) { console.warn(e); } });
   updateUI();
 }
 
 /* ---------- peers ---------- */
+const hooks = { msg: [], sub: [], off: [] };
 function onMessage(topic, buf) {
+  for (const h of hooks.msg) if (h(topic, buf)) return;
   const parts = topic.split('/'), id = parts[parts.length - 1];
   if (id === st.cid) return;
   if (topic.includes('/bye/')) { removePeer(id); return; }
@@ -310,7 +314,7 @@ async function setMode(m) {
   updateUI();
   if (m !== 'off') connect();
 }
-window.__presence = { openPeerSheet, get myProf() { return myProf; }, st, peers, setMode, reportPeer, get pubFallback() { return pubFallback; }, get client() { return client; } };
+window.__presence = { hooks, neighborCells, cellOf, get base() { return base; }, get openPeer() { return openPeer; }, get myCell() { return cells; }, openPeerSheet, get myProf() { return myProf; }, st, peers, setMode, reportPeer, get pubFallback() { return pubFallback; }, get client() { return client; } };
 
 $('friendsBtn').onclick = () => { updateUI(); $('friendsPanel').classList.remove('hidden'); };
 $('closeFriends').onclick = () => $('friendsPanel').classList.add('hidden');
