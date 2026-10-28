@@ -26,6 +26,10 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          # The cloud-agent token cannot call the Pages API. Let this job
+          # try to create the site with its pages: write token.
+          enablement: true
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
