@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1a73e8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>MyCar GPS</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map"></div>
+
+<!-- Nav banner -->
+<div id="navBanner" class="hidden">
+  <div class="nb-icon" id="nbIcon">↑</div>
+  <div class="nb-text"><div id="nbDist" class="nb-dist">—</div><div id="nbInstr" class="nb-instr">—</div></div>
+</div>
+
+<!-- Search -->
+<div id="searchWrap">
+  <div id="searchBar">
+    <span class="sb-icon">🔍</span>
+    <input id="searchInput" type="search" placeholder="Search here" autocomplete="off">
+    <button id="clearSearch" class="hidden" aria-label="Clear">✕</button>
+    <button id="carBtn" class="avatar" aria-label="My Car" title="My Car"><img id="carBtnImg" alt=""></button>
+  </div>
+  <div id="suggestions" class="hidden"></div>
+</div>
+
+<!-- Floating buttons -->
+<div id="fabs">
+  <button class="fab" id="darkBtn" title="Dark mode">🌙</button>
+  <button class="fab" id="simBtn" title="Simulate drive">▶︎</button>
+  <button class="fab" id="compassBtn" title="North up"><span id="compassNeedle">➤</span></button>
+  <button class="fab big" id="locateBtn" title="Your location">◎</button>
+</div>
+<div id="speedPill" class="hidden"><b id="speedVal">0</b><small>mph</small></div>
+<div id="toast" class="hidden"></div>
+
+<!-- Bottom sheet -->
+<div id="sheet" class="hidden">
+  <div class="grab"></div>
+  <div id="sheetPlace"><div id="placeName" class="pn"></div><div id="placeAddr" class="pa"></div></div>
+  <div class="route-sum">
+    <div><span id="eta" class="eta">—</span> <span id="dist" class="dist"></span></div>
+    <div id="arrive" class="arrive"></div>
+  </div>
+  <div class="sheet-actions">
+    <button id="startBtn" class="primary">▲ Start</button>
+    <button id="stepsBtn" class="secondary">☰ Steps</button>
+    <button id="closeRoute" class="secondary">✕</button>
+  </div>
+  <ol id="steps" class="hidden"></ol>
+</div>
+
+<!-- Nav bottom bar -->
+<div id="navBar" class="hidden">
+  <button id="exitNav" class="round red">✕</button>
+  <div class="nv-mid"><div><span id="navEta" class="eta">—</span></div><div id="navRemain" class="dist"></div></div>
+  <button id="voiceBtn" class="round">🔊</button>
+</div>
+
+<!-- Car panel -->
+<div id="carPanel" class="panel hidden">
+  <div class="panel-card">
+    <div class="panel-head"><h2>My Car</h2><button id="closeCar" class="xbtn">✕</button></div>
+    <div class="preview-wrap"><div id="preview"><img id="previewImg" alt="car preview"></div><div class="arrow-hint">▲ front</div></div>
+    <label class="upload primary">📷 Upload photo of your car
+      <input id="fileInput" type="file" accept="image/*" capture="environment" hidden>
+    </label>
+    <div id="procStatus" class="status"></div>
+    <div class="row"><label><input type="checkbox" id="bgRemove" checked> Remove background automatically</label></div>
+    <div class="row"><label>Style
+      <select id="frameMode"><option value="cutout">Cut-out (no frame)</option><option value="badge">Round badge</option></select></label></div>
+    <div class="row"><label>Size <input type="range" id="sizeRange" min="32" max="140" value="64"></label></div>
+    <div class="row"><label>Rotate (point nose up ▲) <input type="range" id="rotRange" min="-180" max="180" step="5" value="0"></label><span id="rotVal">0°</span></div>
+    <div class="row"><label><input type="checkbox" id="rotateWithHeading" checked> Turn with driving direction</label></div>
+    <h3>Or pick an icon</h3>
+    <div id="defaults"></div>
+  </div>
+</div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
