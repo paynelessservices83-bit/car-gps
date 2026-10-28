@@ -69,3 +69,43 @@ h3{font-size:14px;font-weight:500;color:var(--muted);margin:16px 0 8px}
 .car-inner.badge img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:4px solid #fff;box-shadow:0 0 0 2px var(--blue),0 3px 8px rgba(0,0,0,.4);filter:none}
 .dest-pin{font-size:34px;transform:translateY(-14px);filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
 .maplibregl-ctrl-bottom-left{bottom:0}
+/* friends */
+#friendsBtn{position:relative}
+#friendsDot{position:absolute;top:6px;right:6px;width:10px;height:10px;border-radius:50%;background:#34a853;border:2px solid #fff}
+.txt{flex:1;min-width:0;font-size:15px;padding:8px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg)}
+.txt.code{text-transform:uppercase;letter-spacing:2px;font-family:monospace}
+.wide{width:100%;margin:6px 0}
+.primary.stop{background:#d93025}
+.notice{font-size:12px;color:var(--muted);background:rgba(251,188,4,.12);border-radius:8px;padding:8px;margin:8px 0}
+.friend{display:flex;align-items:center;gap:10px;width:100%;padding:8px;border-radius:10px;background:transparent;text-align:left;color:var(--fg)}
+.friend:hover{background:rgba(0,0,0,.05)}
+.friend img{width:36px;height:36px;object-fit:contain}
+.friend .fn{flex:1;font-weight:500}.friend .fd{font-size:13px;color:var(--muted)}
+.peer-marker{transition:opacity .8s}
+.peer-marker.stale{opacity:.35}
+.peer-car{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.peer-car img{max-width:100%;max-height:100%;filter:drop-shadow(0 3px 4px rgba(0,0,0,.45))}
+.peer-label{position:absolute;left:50%;bottom:100%;transform:translateX(-50%);white-space:nowrap;background:#fff;color:#202124;font:600 12px system-ui;padding:2px 8px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,.35);margin-bottom:2px}
+.modes{display:flex;gap:6px;margin:8px 0}
+.modes button{flex:1;padding:9px 4px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:13px}
+.modes button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+#firstNotice{position:fixed;left:10px;right:10px;bottom:20px;z-index:60;display:flex;justify-content:center}
+#firstNotice.hidden{display:none}
+.fn-card{max-width:440px;background:var(--card,#fff);color:var(--fg);border-radius:16px;padding:14px;box-shadow:0 4px 18px rgba(0,0,0,.35);font-size:14px}
+.fn-card p{margin:6px 0 10px;color:var(--muted)}
+.fn-btns{display:flex;gap:6px;flex-wrap:wrap}.fn-btns button{padding:8px 12px;font-size:13px}
+#fPrivate .row{gap:6px}#fPrivate .row label{gap:6px}#fPrivate .row button{padding:8px 10px;flex:none}#fCode{width:90px;flex:1}
+.warn{background:#fdecea;color:#b3261e;border-radius:8px;padding:8px;font-size:13px;text-align:left}
+.friend .rep{flex:none;padding:4px 8px;border-radius:8px;font-size:12px;border:1px solid var(--line);background:transparent;color:var(--muted)}
+.col{display:flex;flex-direction:column;gap:4px;margin:8px 0;font-size:14px}
+textarea.txt{resize:vertical;font-family:inherit}
+.card-thumb{max-width:100%;max-height:180px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:zoom-in;display:block;margin:6px 0}
+.card-thumb.hidden{display:none}
+.ps-top{display:flex;gap:12px;align-items:center}.ps-top img{width:64px;height:64px;object-fit:contain}
+.ps-desc{font-weight:500;margin:8px 0 2px}.ps-bio{color:var(--muted);font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.ps-links{display:flex;gap:8px;margin:8px 0}.ps-links a{text-decoration:none;text-align:center;flex:1}
+.biz-tag{display:inline-block;background:#fbbc04;color:#202124;font-size:12px;font-weight:600;padding:2px 8px;border-radius:10px}
+.peer-biz{position:absolute;right:-6px;top:-6px;width:22px;height:22px;border-radius:50%;background:#fbbc04;border:2px solid #fff;font-size:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.4)}
+.peer-marker{cursor:pointer}
+#cardView{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center}
+#cardView.hidden{display:none}#cardView img{max-width:96vw;max-height:92vh}

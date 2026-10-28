@@ -125,6 +125,7 @@ function onPosition(lon, lat, hdg, spd, simulated) {
     if (simulated) map.jumpTo(opts); else map.easeTo(opts);
   }
   if (nav.active) navUpdate();
+  if (window.presenceOnPos) window.presenceOnPos();
   if (!simulated) try { localStorage.setItem('lastPos', JSON.stringify(p)); } catch (e) {}
 }
 function startGeo() {
@@ -343,7 +344,7 @@ $('rotateWithHeading').onchange = e => { settings.turn = e.target.checked; save(
 $('bgRemove').onchange = e => { settings.bg = e.target.checked; save(); };
 DEFAULTS.forEach((src, i) => {
   const b = document.createElement('button'); b.innerHTML = `<img src="${src}" alt="car ${i + 1}">`;
-  b.onclick = () => { Object.assign(settings, { img: src, rot: 0, mode: 'cutout', size: i === DEFAULTS.length - 1 ? 44 : 64 }); applyCar(); save(); };
+  b.onclick = () => { Object.assign(settings, { vehicleOk: true, img: src, rot: 0, mode: 'cutout', size: i === DEFAULTS.length - 1 ? 44 : 64 }); applyCar(); save(); };
   $('defaults').appendChild(b);
 });
 $('fileInput').onchange = async e => { const f = e.target.files[0]; if (f) await processCarFile(f); e.target.value = ''; };
@@ -391,8 +392,13 @@ async function processCarFile(file) {
     // Car photos are usually side-on; with a cut-out we guess the nose should point up
     if (result.mode === 'cutout' && result.canvas.width > result.canvas.height * 1.2) settings.rot = -90; else settings.rot = 0;
     settings.size = result.mode === 'badge' ? 60 : 80;
-    applyCar(); save();
-    if (!st.textContent.startsWith('Background removal not')) st.textContent = 'Done! Use “Rotate” so the front of your car points up ▲';
+    settings.vehicleOk = undefined; applyCar(); save();
+    const bgMsg = st.textContent.startsWith('Background removal not') ? st.textContent + ' ' : '';
+    st.textContent = bgMsg + 'Checking that this is a vehicle…';
+    const chk = window.carCheck ? await window.carCheck(settings.img) : { ok: null };
+    settings.vehicleOk = chk.ok; save();
+    if (chk.ok === false) { st.innerHTML = ''; const w = document.createElement('div'); w.className = 'warn'; w.textContent = `⚠️ This doesn't look like a vehicle (looks like: ${chk.label}). You can still use it on your own map and in private groups, but the public map will show a default car instead. Try another photo?`; st.appendChild(w); }
+    else st.textContent = bgMsg + (chk.ok === null ? 'Done! (vehicle check unavailable — public map will show a default car until it can be checked) ' : 'Vehicle detected ✓ ') + 'Use “Rotate” so the front of your car points up ▲';
   } catch (e) { console.warn(e); st.textContent = 'Could not read that image — try another photo.'; }
 }
 window.__processCarFile = processCarFile;
