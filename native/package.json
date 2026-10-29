@@ -1,5 +1,5 @@
 {
-  "name": "mycar-gps-native",
+  "name": "street-knowledge-native",
   "version": "1.0.0",
   "description": "MyCar GPS native apps (Capacitor) wrapping the MyCar GPS PWA",
   "main": "index.js",
