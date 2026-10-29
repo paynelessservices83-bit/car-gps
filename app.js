@@ -1,5 +1,5 @@
 'use strict';
-/* ===== MyCar GPS ===== */
+/* ===== Street Knowledge ===== */
 const $ = id => document.getElementById(id);
 const STYLES = { light: 'https://tiles.openfreemap.org/styles/liberty', dark: 'https://tiles.openfreemap.org/styles/dark' };
 const OSRM = 'https://router.project-osrm.org/route/v1/driving/';

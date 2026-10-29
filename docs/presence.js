@@ -1,5 +1,5 @@
 'use strict';
-/* ===== Live presence: see other MyCar GPS users ===== */
+/* ===== Live presence: see other Street Knowledge users ===== */
 (() => {
 const MQTT_JS = 'https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js';
 const BROKERS = [ // tried in order; all users normally land on the first
@@ -301,7 +301,7 @@ function updateUI() {
   document.querySelectorAll('#fModes button').forEach(b => b.classList.toggle('on', b.dataset.mode === st.mode));
   $('fPrivate').classList.toggle('hidden', st.mode !== 'private');
   $('fCode').value = st.code; $('fLink').value = st.code ? inviteLink() : '';
-  $('fNotice').textContent = st.mode === 'public' ? '🌍 Public: your live location, name and car photo are visible to everyone using MyCar GPS nearby.'
+  $('fNotice').textContent = st.mode === 'public' ? '🌍 Public: your live location, name and car photo are visible to everyone using Street Knowledge nearby.'
     : st.mode === 'private' ? '🔒 Private: your live location and car photo are shared with anyone who has this group code or link.'
     : '⛔ Off: you are not sharing your location and you can\'t see other cars.';
   if (st.mode === 'off') status('Sharing is off');
@@ -327,7 +327,7 @@ $('fNew').onclick = () => { st.code = newCode(); setMode('private'); };
 $('fJoin').onclick = () => { const c = $('fCode').value.trim().toUpperCase(); if (!/^[A-Z0-9]{4,8}$/.test(c)) { toast('Enter a 4–8 character code'); return; } st.code = c; setMode('private'); };
 $('fShare').onclick = async () => {
   const url = inviteLink();
-  if (navigator.share) { try { await navigator.share({ title: 'MyCar GPS', text: 'See my car live on MyCar GPS', url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
+  if (navigator.share) { try { await navigator.share({ title: 'Street Knowledge', text: 'See my car live on Street Knowledge', url }); return; } catch (e) { if (e.name === 'AbortError') return; } }
   try { await navigator.clipboard.writeText(url); toast('Invite link copied'); } catch (e) { $('fLink').select(); toast('Copy the link above'); }
 };
 document.querySelectorAll('#firstNotice button').forEach(b => b.onclick = () => {

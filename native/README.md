@@ -1,19 +1,19 @@
-# MyCar GPS — native apps (Android + iOS) via Capacitor
+# Street Knowledge — native apps (Android + iOS) via Capacitor
 
-This folder wraps the MyCar GPS web app (repo `docs/`) as native apps. The PWA stays as it is; `scripts/copy-web.sh`
+This folder wraps the Street Knowledge web app (repo `docs/`) as native apps. The PWA stays as it is; `scripts/copy-web.sh`
 copies it into `www/` and adds `native-shim.js`, which only runs inside the app:
 - location through `@capacitor/geolocation` (falls back to the browser API)
 - voice guidance through `@capacitor-community/text-to-speech` (Android WebView has no speechSynthesis)
 - tel:/website links open outside the app; the service worker is not registered in the app
 - invite links point to the GitHub Pages URL
 
-App id: `com.paynelessservices.mycargps` · name: **MyCar GPS**
+App id: `com.paynelessservices.mycargps` · name: **Street Knowledge**
 
 ## Repo layout
 ```
 docs/                    <- PWA (GitHub Pages)
 native/                  <- this folder
-.github/workflows/       <- android.yml and ios.yml (build only; they do not deploy Pages)
+.github/workflows/       <- copy from native/repo-root/.github/workflows/ (android.yml, ios.yml)
 ```
 
 ## Build Android locally (JDK 21 + Android SDK 35)

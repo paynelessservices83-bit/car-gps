@@ -1,5 +1,5 @@
 'use strict';
-/* MyCar GPS native shim: only active inside the Capacitor app; the web/PWA build never loads this file. */
+/* Street Knowledge native shim: only active inside the Capacitor app; the web/PWA build never loads this file. */
 (() => {
   const C = window.Capacitor;
   if (!C || !C.isNativePlatform || !C.isNativePlatform()) return;

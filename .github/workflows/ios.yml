@@ -33,6 +33,6 @@ jobs:
             -derivedDataPath build-device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" build
       - name: Zip simulator app
         working-directory: native/ios/App
-        run: cd build/Build/Products/Debug-iphonesimulator && zip -qr $GITHUB_WORKSPACE/MyCarGPS-simulator.app.zip App.app
+        run: cd build/Build/Products/Debug-iphonesimulator && zip -qr $GITHUB_WORKSPACE/StreetKnowledge-simulator.app.zip App.app
       - uses: actions/upload-artifact@v4
-        with: { name: mycargps-ios-simulator, path: MyCarGPS-simulator.app.zip }
+        with: { name: mycargps-ios-simulator, path: StreetKnowledge-simulator.app.zip }
