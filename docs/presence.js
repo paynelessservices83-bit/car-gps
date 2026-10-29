@@ -295,7 +295,8 @@ function renderList() {
     L.appendChild(b);
   });
 }
-function inviteLink() { return location.origin + location.pathname + '?group=' + st.code; }
+const PUBLIC_URL = 'https://paynelessservices83-bit.github.io/car-gps/';
+function inviteLink() { const native = window.Capacitor && Capacitor.isNativePlatform && Capacitor.isNativePlatform(); return (native || !/^https?:$/.test(location.protocol) ? PUBLIC_URL : location.origin + location.pathname) + '?group=' + st.code; }
 function updateUI() {
   document.querySelectorAll('#fModes button').forEach(b => b.classList.toggle('on', b.dataset.mode === st.mode));
   $('fPrivate').classList.toggle('hidden', st.mode !== 'private');

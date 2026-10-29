@@ -405,4 +405,5 @@ window.__processCarFile = processCarFile;
 
 /* ---------- boot ---------- */
 map.on('load', () => { startGeo(); setFollow(true); });
-if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
+const IS_NATIVE = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+if (!IS_NATIVE && 'serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
